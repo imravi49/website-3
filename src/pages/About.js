@@ -1,1 +1,0 @@
-import React from 'react';export default function About(){return (<main style={{padding:20}}><h2>About</h2></main>);}
