@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ravi Sharma Photo & Films</title>
+  <meta name="description" content="Cinematic wedding photography and films by Ravi Sharma Photo & Films, Anand." />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Injected cinematic gold shimmer background + UI features -->
+<style id="ravi-gold-style">
+/* Gold shimmer background */
+.ravi-cinematic-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(212,175,55,0.12), transparent 60%),
+              radial-gradient(circle at 70% 70%, rgba(255,215,0,0.08), transparent 70%),
+              #000;
+  overflow: hidden;
+}
+.ravi-cinematic-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(212,175,55,0.15) 0%, transparent 50%, rgba(212,175,55,0.1) 100%);
+  mix-blend-mode: overlay;
+  animation: shimmerMove 14s infinite linear;
+}
+@keyframes shimmerMove {
+  0% { transform: translateX(-20%) rotate(0deg); opacity: 0.6; }
+  50% { transform: translateX(20%) rotate(10deg); opacity: 1; }
+  100% { transform: translateX(-20%) rotate(0deg); opacity: 0.6; }
+}
+
+/* WhatsApp floating button */
+#whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #25D366;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 9999;
+}
+#whatsapp-float img {
+  width: 32px;
+  height: 32px;
+}
+
+/* Hamburger menu */
+#hamburger-menu { position: fixed; top: 18px; right: 20px; z-index: 10000; cursor: pointer; }
+#hamburger-menu div { width: 28px; height: 3px; background: #fff; margin: 5px 0; transition: 0.3s; }
+#side-menu {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 260px;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  transition: 0.4s;
+  z-index: 9998;
+  padding: 50px 20px;
+}
+#side-menu.open { right: 0; }
+#side-menu a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 15px 0;
+}
+#side-menu a:hover { color: #d4af37; }
+
+/* Logo placeholder */
+#site-logo {
+  position: fixed;
+  top: 15px;
+  left: 20px;
+  color: #d4af37;
+  font-weight: bold;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+/* Reverse animation + remove blur for 3rd image */
+.hero img:nth-of-type(3) { filter: none !important; backdrop-filter: none !important; }
+.hero *[style*="animation"] { animation-direction: reverse !important; }
+</style>
+
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+<script id="ravi-gold-script">
+document.addEventListener("DOMContentLoaded", function() {
+  // Add gold shimmer bg to homepage
+  if (window.location.pathname === "/" || window.location.pathname.includes("index")) {
+    const bg = document.createElement("div");
+    bg.className = "ravi-cinematic-bg";
+    document.body.prepend(bg);
+  }
+
+  // WhatsApp floating button
+  const w = document.createElement("div");
+  w.id = "whatsapp-float";
+  w.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">';
+  w.onclick = () => window.open("https://wa.me/917383826282", "_blank");
+  document.body.appendChild(w);
+
+  // Hamburger menu
+  const h = document.createElement("div");
+  h.id = "hamburger-menu";
+  h.innerHTML = "<div></div><div></div><div></div>";
+  document.body.appendChild(h);
+  const s = document.createElement("div");
+  s.id = "side-menu";
+  s.innerHTML = '<a href="/">Home</a><a href="/portfolio.html">Portfolio</a><a href="/films.html">Films</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/admin.html">Admin</a>';
+  document.body.appendChild(s);
+  h.onclick = () => s.classList.toggle("open");
+
+  // Logo placeholder
+  const logo = document.createElement("div");
+  logo.id = "site-logo";
+  logo.textContent = "RS";
+  logo.onclick = () => window.location.href = "/";
+  document.body.appendChild(logo);
+
+  // Book Inquiry
+  const btn = document.createElement("div");
+  btn.id = "book-inquiry";
+  btn.textContent = "Book Inquiry";
+  btn.style = "position:fixed;bottom:20px;right:20px;background:#d4af37;color:black;padding:10px 20px;border-radius:25px;font-weight:bold;cursor:pointer;z-index:9999;";
+  document.body.appendChild(btn);
+  btn.onclick = () => {
+    const form = document.querySelector("form") || document.querySelector("#inquiry");
+    if(form) form.scrollIntoView({behavior:"smooth"});
+  };
+
+  // Add "Skip" for email and "Photo Album" checkbox
+  document.querySelectorAll("form").forEach(form => {
+    const email = form.querySelector('input[type="email"]');
+    if(email){
+      email.removeAttribute("required");
+      const skip = document.createElement("button");
+      skip.textContent = "Skip";
+      skip.type = "button";
+      skip.style.marginLeft = "8px";
+      skip.onclick = () => { email.value = ""; };
+      email.insertAdjacentElement("afterend", skip);
+    }
+    const checkbox = form.querySelector('input[type="checkbox"]');
+    if(checkbox){
+      const label = document.createElement("label");
+      label.innerHTML = '<input type="checkbox" name="photo_album"> Photo Album';
+      checkbox.closest("form").appendChild(label);
+    }
+  });
+
+  // YouTube button restore
+  const yt = document.createElement("a");
+  yt.href = "https://www.youtube.com/@tasweerphotographybyravisharma";
+  yt.target = "_blank";
+  yt.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" style="height:20px;">';
+  const footer = document.querySelector("footer") || document.body;
+  footer.appendChild(yt);
+});
+</script>
+
+</body>
+</html>
