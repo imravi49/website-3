@@ -1,0 +1,1 @@
+import React from 'react';export default function Films(){return (<main style={{padding:20}}><h2>Films</h2></main>); }

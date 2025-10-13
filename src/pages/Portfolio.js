@@ -1,0 +1,1 @@
+import React from 'react';export default function Portfolio(){return (<main style={{padding:20}}><h2>Portfolio</h2><p>Grid and lightbox implemented in full project.</p></main>); }
