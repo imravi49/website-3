@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[context.production.environment]
+  # Add environment variables here if you wish to use them on Netlify
+  # REACT_APP_EMAILJS_TEMPLATE_ID = "template_inquiry"
+  # REACT_APP_EMAILJS_USER_ID = "user_ravi_default"
