@@ -1,0 +1,1 @@
+import React from 'react';export default function InquiryModal({onClose}){return (<div style={{position:'fixed',inset:0,display:'flex',alignItems:'center',justifyContent:'center'}}><div style={{background:'#000',padding:20,borderRadius:8}}><h3>Inquiry form (complete in full project)</h3><button onClick={onClose}>Close</button></div></div>);}
