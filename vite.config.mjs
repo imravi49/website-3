@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [react()],
   root: '.',                // project root
   publicDir: 'public',      // tells Vite where to find index.html
-  build: {
-    outDir: 'dist',
+  build: { outDir: 'dist' },
+  publicDir: 'public'
     rollupOptions: {
       input: resolve(__dirname, 'public/index.html')
     }
