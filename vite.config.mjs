@@ -1,19 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
 
+// ✅ Works both locally and on Netlify
 export default defineConfig({
   plugins: [react()],
-  root: '.',              // Root of project
-  publicDir: 'public',    // Folder for public assets
   build: {
-    outDir: 'dist',       // Build output folder
-    rollupOptions: {
-      input: resolve(__dirname, 'public/index.html')
-    }
+    outDir: 'dist'
   },
-  server: {
-    port: 5173,
-    open: true
-  }
+  base: './'
 })
